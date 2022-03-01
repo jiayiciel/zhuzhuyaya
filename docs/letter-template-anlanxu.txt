@@ -1,0 +1,22 @@
+[[first_name]] [[last_name]]
+[[address]], [[city]],
+[[county]], [[state]], [[zip]]
+([[email]])
+
+Dear [[first_name]] [[last_name]],
+you have already been one of our VIPs!!
+
+So this email is for confirmation of your personal information you left on our website.
+1. your first name: [[first_name]]
+2. your last name: [[last_name]]
+3. your company name: [[company_name]]
+4. your phone number: [[phone1]]
+5. your zip code: [[zip]]
+
+If you find any incorrect information, please email us in anlanxu@gmail.com with the Subject [[first_name]] [[last_name]] wrong information.
+
+If you find everything good, you do not need to do anything!
+
+Thank you!
+Sincerely,
+CEO Anlan Xu
