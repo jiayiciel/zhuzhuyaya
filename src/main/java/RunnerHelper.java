@@ -1,16 +1,10 @@
 import java.io.IOException;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 
 import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
-
 
 
 public class RunnerHelper {
@@ -73,13 +67,13 @@ public class RunnerHelper {
         }
 
         if (cmd.hasOption("email") && cmd.hasOption("email-template")){
-            defaultEmailTF.setMyPath(Paths.get(cmd.getOptionValue("email-template")));
+            defaultEmailTF.setPath(Paths.get(cmd.getOptionValue("email-template")));
 //            defaultEmailTF.fillAll();
             defaultEmailTF.fillAll(outPath);
         }
 
         else if (cmd.hasOption("letter") && cmd.hasOption("letter-template")){
-            defaultLetterTF.setMyPath(Paths.get(cmd.getOptionValue("letter-template")));
+            defaultLetterTF.setPath(Paths.get(cmd.getOptionValue("letter-template")));
 //            defaultLetterTF.fillAll();
             defaultLetterTF.fillAll(outPath);
         }

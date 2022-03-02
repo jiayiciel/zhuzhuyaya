@@ -1,29 +1,18 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 public class FillerHelper {
 
 
-    private List<PersonInfo> personInfosGetter;
-    private String templateFileName;
-    private Path myPath;
+    private List<MemberInfo> memberInfoList;
+    private String template;
 
-    public FillerHelper(List<PersonInfo> personInfosGetter, String templateFileName) {
-        this.personInfosGetter = personInfosGetter;
-        this.templateFileName = templateFileName;
-        this.myPath = Paths.get(templateFileName);
+    public FillerHelper(List<MemberInfo> memberInfoList, String template) {
+        this.memberInfoList = memberInfoList;
+        this.template = template;
+
     }
 
 
@@ -31,8 +20,8 @@ public class FillerHelper {
      *
      * @return personInfoGetter
      */
-    public List<PersonInfo> getPersonInfosGetter() {
-        return personInfosGetter;
+    public List<MemberInfo> getPersonInfos() {
+        return memberInfoList;
     }
 
     /**
@@ -40,23 +29,23 @@ public class FillerHelper {
      * @return template file name
      */
     public String getFileName() {
-        return templateFileName;
+        return template;
     }
 
     /**
      *
-     * @param personInfosGetter set personInfoGetter
+     * @param memberInfoList set personInfoGetter
      */
-    public void setPersonInfosGetter(List<PersonInfo> personInfosGetter) {
-        this.personInfosGetter = personInfosGetter;
+    public void setPersonInfos(List<MemberInfo> memberInfoList) {
+        this.memberInfoList = memberInfoList;
     }
 
     /**
      *
-     * @param templateFileName set template file name
+     * @param template set template file name
      */
-    public void setTemplateFileName(String templateFileName) {
-        this.templateFileName = templateFileName;
+    public void settemplate(String template) {
+        this.template = template;
     }
 
 

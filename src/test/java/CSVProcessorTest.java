@@ -1,5 +1,3 @@
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -22,28 +20,28 @@ class CSVProcessorTest {
   @Test
   void getFileName() {
     cptest = new CSVProcessor("docs\\insurance-company-members.csv");
-    Assertions.assertEquals("docs\\insurance-company-members.csv", cptest.getFileName());
+    Assertions.assertEquals("docs\\insurance-company-members.csv", cptest.getFile());
   }
 
   @Test
   void setFileName() {
     cptest = new CSVProcessor("docs\\insurance-company-members.csv");
-    cptest.setFileName(null);
-    Assertions.assertEquals(null, cptest.getFileName());
+    cptest.setFile(null);
+    Assertions.assertEquals(null, cptest.getFile());
   }
 
   @Test
   void getMyPath() {
     cptest = new CSVProcessor("docs\\insurance-company-members.csv");
     Path expectedPath = Paths.get("docs\\insurance-company-members.csv");
-    Assertions.assertEquals(expectedPath, cptest.getMyPath());
+    Assertions.assertEquals(expectedPath, cptest.getPath());
   }
 
   @Test
   void setMyPath() {
     cptest = new CSVProcessor("docs\\insurance-company-members.csv");
     Path expectedPath = null;
-    cptest.setMyPath(null);
-    Assertions.assertEquals(expectedPath, cptest.getMyPath());
+    cptest.setPath(null);
+    Assertions.assertEquals(expectedPath, cptest.getPath());
   }
 }

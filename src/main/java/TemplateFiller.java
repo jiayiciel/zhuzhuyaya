@@ -1,16 +1,9 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 /**
@@ -18,10 +11,9 @@ import java.util.regex.Pattern;
  */
 public class TemplateFiller {
 
-  private List<PersonInfo> personInfosGetter;
-  private String templateFileName;
-  private Path myPath;
-
+  private List<MemberInfo> memberInfoList;
+  private String template;
+  private Path path;
 
   private static String REGEX_FIR_NAME = "\\[\\[first_name]]";
   private static String REGEX_LAST_NAME = "\\[\\[last_name]]";
@@ -36,40 +28,39 @@ public class TemplateFiller {
   private static String REGEX_EMAIL = "\\[\\[email]]";
   private static String REGEX_WEB = "\\[\\[web]]";
 
+
   /**
    * constructor
-   * @param personInfosGetter handle List of PersonInfo
-   * @param templateFileName template file name
+   * @param memberInfoList handle List of PersonInfo
+   * @param template template file name
    */
-  public TemplateFiller(List<PersonInfo> personInfosGetter, String templateFileName) {
-    this.personInfosGetter = personInfosGetter;
-    this.templateFileName = templateFileName;
-    this.myPath = Paths.get(templateFileName);
+  public TemplateFiller(List<MemberInfo> memberInfoList, String template) {
+    this.memberInfoList = memberInfoList;
+    this.template = template;
+    this.path = Paths.get(template);
   }
 
   /**
    *
-   * @param information one element in List of PersonInfo
+   * @param info one element in List of PersonInfo
    * @return template filling result as a String data
    * @throws IOException when i/o exception happens
    */
-  public String fillTemplate(PersonInfo information) throws IOException {
+  public String fillTemplate(MemberInfo info) throws IOException {
 
-    String data = Files.readString(this.myPath);
-
-    data = data.replaceAll(REGEX_FIR_NAME, information.getFirst_name());
-    data = data.replaceAll(REGEX_LAST_NAME, information.getLast_name());
-    data = data.replaceAll(REGEX_COMP_NAME, information.getCompany_name());
-    data = data.replaceAll(REGEX_ADD, information.getAddress());
-    data = data.replaceAll(REGEX_CITY, information.getCity());
-    data = data.replaceAll(REGEX_COUNTY, information.getCounty());
-    data = data.replaceAll(REGEX_STATE, information.getState());
-    data = data.replaceAll(REGEX_ZIP, information.getZip());
-    data = data.replaceAll(REGEX_PHONE1, information.getPhone1());
-    data = data.replaceAll(REGEX_PHONE2, information.getPhone2());
-    data = data.replaceAll(REGEX_EMAIL, information.getEmail());
-    data = data.replaceAll(REGEX_WEB, information.getWeb());
-
+    String data = Files.readString(this.path);
+    data = data.replaceAll(REGEX_FIR_NAME, info.getFirst_name());
+    data = data.replaceAll(REGEX_LAST_NAME, info.getLast_name());
+    data = data.replaceAll(REGEX_COMP_NAME, info.getCompany_name());
+    data = data.replaceAll(REGEX_ADD, info.getAddress());
+    data = data.replaceAll(REGEX_CITY, info.getCity());
+    data = data.replaceAll(REGEX_COUNTY, info.getCounty());
+    data = data.replaceAll(REGEX_STATE, info.getState());
+    data = data.replaceAll(REGEX_ZIP, info.getZip());
+    data = data.replaceAll(REGEX_PHONE1, info.getPhone1());
+    data = data.replaceAll(REGEX_PHONE2, info.getPhone2());
+    data = data.replaceAll(REGEX_EMAIL, info.getEmail());
+    data = data.replaceAll(REGEX_WEB, info.getWeb());
     return data;
 
   }
@@ -83,34 +74,42 @@ public class TemplateFiller {
 //      System.out.println(fillTemplate(this.personInfosGetter.get(i)));
 //    }
 //  }
+
+
   /**
    * print all template filling result in a file, when fillALl()method has the input of the file name
    * @throws IOException when i/o exception happens
-   * @param outFilePath the file that the method will print all template filling result in
+   * @param outP the file that the method will print all template filling result in
    */
-  public void fillAll(String outFilePath) throws IOException {
-
-    if (outFilePath == null){
-      for (int i = 0; i < this.personInfosGetter.size(); i++){
-        System.out.println(fillTemplate(this.personInfosGetter.get(i)));
+  public void fillAll(String outP) throws IOException {
+    FileWriter writer;
+    if (outP == null){
+      for (int i = 0; i < this.memberInfoList.size(); i++){
+        System.out.println(fillTemplate(this.memberInfoList.get(i)));
       }
     }
     else {
-      FileWriter writer;
-      for (int i = 0; i < this.personInfosGetter.size(); i++){
-
-        try {
-          writer = new FileWriter(outFilePath
-                  + personInfosGetter.get(i).getFirst_name()
+      for (int i = 0; i < this.memberInfoList.size(); i++){
+                  writer = new FileWriter(outP
+                  + memberInfoList.get(i).getFirst_name()
                   + "_"
-                  + personInfosGetter.get(i).getLast_name()
+                  + memberInfoList.get(i).getLast_name()
                   + ".txt");
-          writer.write(fillTemplate(this.personInfosGetter.get(i)));
+          writer.write(fillTemplate(this.memberInfoList.get(i)));
           writer.flush();
           writer.close();
-        }catch (Exception e){
-          e.printStackTrace();
-        }
+//        try {
+//          writer = new FileWriter(outP
+//                  + memberInfoList.get(i).getFirst_name()
+//                  + "_"
+//                  + memberInfoList.get(i).getLast_name()
+//                  + ".txt");
+//          writer.write(fillTemplate(this.memberInfoList.get(i)));
+//          writer.flush();
+//          writer.close();
+//        }catch (Exception e){
+//          e.printStackTrace();
+//        }
       }
     }
   }
@@ -118,10 +117,10 @@ public class TemplateFiller {
 
   /**
    *
-   * @param myPath set mypath
+   * @param path set mypath
    */
-  public void setMyPath(Path myPath) {
-    this.myPath = myPath;
+  public void setPath(Path path) {
+    this.path = path;
   }
 
 

@@ -3,7 +3,7 @@ import com.opencsv.bean.CsvBindByName;
 /**
  * this class helps CSVProcessor. Fields in this class is the headers of insurance-company-members.csv
  */
-public class PersonInfo {
+public class MemberInfo {
 
   @CsvBindByName
   private String first_name;
@@ -134,21 +134,23 @@ public class PersonInfo {
     return web;
   }
 
+
+
   @Override
   public String toString() {
-    return "PersonInfo{" +
-        "first_name='" + first_name + '\'' +
-        ", last_name='" + last_name + '\'' +
-        ", company_name='" + company_name + '\'' +
-        ", address='" + address + '\'' +
-        ", city='" + city + '\'' +
-        ", county='" + county + '\'' +
-        ", state='" + state + '\'' +
-        ", zip='" + zip + '\'' +
-        ", phone1='" + phone1 + '\'' +
-        ", phone2='" + phone2 + '\'' +
-        ", email='" + email + '\'' +
-        ", web='" + web + '\'' +
-        '}';
+    return "MemberInfo{" +
+            "first_name='" + first_name + '\'' +
+            ", last_name='" + last_name + '\'' +
+            ", company_name='" + company_name + '\'' +
+            ", address='" + address + '\'' +
+            ", city='" + city + '\'' +
+            ", county='" + county + '\'' +
+            ", state='" + state + '\'' +
+            ", zip='" + zip + '\'' +
+            ", phone1='" + phone1 + '\'' +
+            ", phone2='" + phone2 + '\'' +
+            ", email='" + email + '\'' +
+            ", web='" + web + '\'' +
+            '}';
   }
 }

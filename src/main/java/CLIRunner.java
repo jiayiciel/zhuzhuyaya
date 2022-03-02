@@ -55,7 +55,7 @@ public class CLIRunner {
 
     formatter.printHelp("txt_filler", options, true);
 
-    RunnerHelper.cmdHelper(defaultCSVProcessor, defaultEmailTF, defaultEmailTF,cmd, options, formatter);
+    RunnerHelper.cmdHelper(defaultCSVProcessor, defaultEmailTF, defaultEmailTF, cmd, options, formatter);
 
   }
 

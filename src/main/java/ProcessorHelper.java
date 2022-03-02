@@ -12,12 +12,12 @@ import java.util.List;
 
 public class ProcessorHelper {
 
-    private String fileName;
-    private Path myPath;
+    private String file;
+    private Path path;
 
-    public ProcessorHelper(String fileName) {
-        this.fileName = fileName;
-        this.myPath = Paths.get(fileName);
+    public ProcessorHelper(String file) {
+        this.file = file;
+        this.path = Paths.get(file);
     }
 
 
@@ -25,20 +25,26 @@ public class ProcessorHelper {
     }
 
 
-    public static List<PersonInfo> openCSV() throws IOException {
+    public static List<MemberInfo> openCSV() throws IOException {
 
-        BufferedReader br = Files.newBufferedReader(CSVProcessor.getMyPath(), StandardCharsets.UTF_8);
-        HeaderColumnNameMappingStrategy<PersonInfo> strategy = new HeaderColumnNameMappingStrategy<>();
-        strategy.setType(PersonInfo.class);
+        BufferedReader br = Files.newBufferedReader(CSVProcessor.getPath(), StandardCharsets.UTF_8);
+        HeaderColumnNameMappingStrategy<MemberInfo> mappingStrategy = new HeaderColumnNameMappingStrategy<>();
+        mappingStrategy.setType(MemberInfo.class);
+        CsvToBean bean = BeanBuilder(br, mappingStrategy);
+        List<MemberInfo> memberInfos = bean.parse();
+        return memberInfos;
+    }
 
-        CsvToBean ctb = new CsvToBeanBuilder(br)
-                .withType(PersonInfo.class)
-                .withMappingStrategy(strategy)
+    public static CsvToBean BeanBuilder(BufferedReader br, HeaderColumnNameMappingStrategy<MemberInfo> mappingStrategy){
+
+        CsvToBean bean = new CsvToBeanBuilder(br)
+                .withType(MemberInfo.class)
+                .withMappingStrategy(mappingStrategy)
                 .withIgnoreLeadingWhiteSpace(true)
                 .build();
 
-        List<PersonInfo> personInfos = ctb.parse();
-        return personInfos;
+        return bean;
+
     }
 
 

@@ -1,10 +1,4 @@
-import com.opencsv.bean.CsvToBean;
-import com.opencsv.bean.CsvToBeanBuilder;
-import com.opencsv.bean.HeaderColumnNameMappingStrategy;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -14,22 +8,22 @@ import java.util.List;
  */
 public class CSVProcessor {
 
-  private static String fileName;
-  private static Path myPath;
+  private static String file;
+  private static Path path;
 
   /**
-   * @param fileName .cvs file name
+   * @param file .cvs file name
    */
-  public CSVProcessor(String fileName) {
-    this.fileName = fileName;
-    this.myPath = Paths.get(fileName);
+  public CSVProcessor(String file) {
+    this.file = file;
+    this.path = Paths.get(file);
   }
 
   /**
    * @return a List of PersonInfo of certain .csv file
    * @throws IOException when i/o happens
    */
-  public List<PersonInfo> openCSVToBean() throws IOException {
+  public List<MemberInfo> openCSVToBean() throws IOException {
 
 //    BufferedReader br = Files.newBufferedReader(getMyPath(), StandardCharsets.UTF_8);
 //    HeaderColumnNameMappingStrategy<PersonInfo> strategy = new HeaderColumnNameMappingStrategy<>();
@@ -42,41 +36,42 @@ public class CSVProcessor {
 //        .build();
 //
 //    List<PersonInfo> personInfos = ctb.parse();
-    List<PersonInfo> personInfos = ProcessorHelper.openCSV();
 
-    return personInfos;
+    List<MemberInfo> memberInfos = ProcessorHelper.openCSV();
+
+    return memberInfos;
   }
 
   /**
    *
    * @return file name
    */
-  public static String getFileName() {
-    return fileName;
+  public static String getFile() {
+    return file;
   }
 
   /**
    *
-   * @param fileName set file name
+   * @param file set file name
    */
-  public void setFileName(String fileName) {
-    this.fileName = fileName;
+  public void setFile(String file) {
+    this.file = file;
   }
 
   /**
    *
-   * @return myPath
+   * @return path
    */
-  public static Path getMyPath() {
-    return myPath;
+  public static Path getPath() {
+    return path;
   }
 
   /**
    *
-   * @param myPath set myPath
+   * @param path set path
    */
-  public void setMyPath(Path myPath) {
-    this.myPath = myPath;
+  public void setPath(Path path) {
+    this.path = path;
   }
 
 }
