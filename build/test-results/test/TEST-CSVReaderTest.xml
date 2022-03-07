@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="CSVReaderTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2022-03-07T22:30:01" hostname="USABOS117224LT" time="0.021">
+  <properties/>
+  <testcase name="getFile()" classname="CSVReaderTest" time="0.006"/>
+  <testcase name="getPath()" classname="CSVReaderTest" time="0.001"/>
+  <testcase name="openCSVToBean()" classname="CSVReaderTest" time="0.011"/>
+  <testcase name="setFile()" classname="CSVReaderTest" time="0.001"/>
+  <testcase name="setPath()" classname="CSVReaderTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

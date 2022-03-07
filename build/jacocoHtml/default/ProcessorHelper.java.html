@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProcessorHelper.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">assignment3</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">ProcessorHelper.java</span></div><h1>ProcessorHelper.java</h1><pre class="source lang-java linenums">import com.opencsv.bean.CsvToBean;
+import com.opencsv.bean.CsvToBeanBuilder;
+import com.opencsv.bean.HeaderColumnNameMappingStrategy;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.Objects;
+
+/**
+ * CSV reader helper
+ */
+public class ProcessorHelper {
+
+    private String file;
+    private Path path;
+
+    /**
+     * @param file the file name and path
+     */
+<span class="fc" id="L24">    public ProcessorHelper(String file) {</span>
+<span class="fc" id="L25">        this.file = file;</span>
+<span class="fc" id="L26">        this.path = Paths.get(file);</span>
+<span class="fc" id="L27">    }</span>
+
+
+    /**
+     * @return parsed memberInfo class
+     * @throws IOException when the csv format is bad
+     */
+    public static List&lt;MemberInfo&gt; openCSV() throws IOException {
+
+<span class="fc" id="L36">        BufferedReader br = Files.newBufferedReader(CSVReader.getPath(), StandardCharsets.UTF_8);</span>
+<span class="fc" id="L37">        HeaderColumnNameMappingStrategy&lt;MemberInfo&gt; mappingStrategy = new HeaderColumnNameMappingStrategy&lt;&gt;();</span>
+<span class="fc" id="L38">        mappingStrategy.setType(MemberInfo.class);</span>
+<span class="fc" id="L39">        CsvToBean bean = BeanBuilder(br, mappingStrategy);</span>
+<span class="fc" id="L40">        List&lt;MemberInfo&gt; memberInfos = bean.parse();</span>
+<span class="fc" id="L41">        return memberInfos;</span>
+    }
+
+    /**
+     * @param br bufferreader
+     * @param mappingStrategy mapping strategy
+     * @return bean from csv
+     */
+    public static CsvToBean BeanBuilder(BufferedReader br, HeaderColumnNameMappingStrategy&lt;MemberInfo&gt; mappingStrategy){
+
+<span class="fc" id="L51">        CsvToBean bean = new CsvToBeanBuilder(br)</span>
+<span class="fc" id="L52">                .withType(MemberInfo.class)</span>
+<span class="fc" id="L53">                .withMappingStrategy(mappingStrategy)</span>
+<span class="fc" id="L54">                .withIgnoreLeadingWhiteSpace(true)</span>
+<span class="fc" id="L55">                .build();</span>
+
+<span class="fc" id="L57">        return bean;</span>
+
+    }
+
+    /**
+     * @return processorhelper to string
+     */
+    @Override
+    public String toString() {
+<span class="fc" id="L66">        return &quot;ProcessorHelper{&quot; +</span>
+                &quot;file='&quot; + file + '\'' +
+                &quot;, path=&quot; + path +
+                '}';
+    }
+
+    /**
+     * @param o - processorhelper object
+     * @return if two objects are equal
+     */
+    @Override
+    public boolean equals(Object o) {
+<span class="fc bfc" id="L78" title="All 2 branches covered.">        if (this == o) return true;</span>
+<span class="fc bfc" id="L79" title="All 2 branches covered.">        if (!(o instanceof ProcessorHelper)) return false;</span>
+<span class="fc" id="L80">        ProcessorHelper that = (ProcessorHelper) o;</span>
+<span class="pc bpc" id="L81" title="3 of 4 branches missed.">        return Objects.equals(file, that.file) &amp;&amp; Objects.equals(path, that.path);</span>
+    }
+
+    /**
+     * @return processorhelper's hashcode
+     */
+    @Override
+    public int hashCode() {
+<span class="fc" id="L89">        return Objects.hash(file, path);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

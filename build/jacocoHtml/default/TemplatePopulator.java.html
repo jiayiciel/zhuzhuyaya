@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TemplatePopulator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">assignment3</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">TemplatePopulator.java</span></div><h1>TemplatePopulator.java</h1><pre class="source lang-java linenums">import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.Objects;
+
+
+/**
+ * this class uses List of PersonInfo and to fill a template
+ */
+public class TemplatePopulator {
+
+  private List&lt;MemberInfo&gt; memberInfoList;
+  private String template;
+  private Path path;
+
+<span class="fc" id="L19">  private static String REGEX_FIR_NAME = &quot;\\[\\[first_name]]&quot;;</span>
+<span class="fc" id="L20">  private static String REGEX_LAST_NAME = &quot;\\[\\[last_name]]&quot;;</span>
+<span class="fc" id="L21">  private static String REGEX_COMP_NAME = &quot;\\[\\[company_name]]&quot;;</span>
+<span class="fc" id="L22">  private static String REGEX_ADD = &quot;\\[\\[address]]&quot;;</span>
+<span class="fc" id="L23">  private static String REGEX_CITY = &quot;\\[\\[city]]&quot;;</span>
+<span class="fc" id="L24">  private static String REGEX_COUNTY = &quot;\\[\\[county]]&quot;;</span>
+<span class="fc" id="L25">  private static String REGEX_STATE = &quot;\\[\\[state]]&quot;;</span>
+<span class="fc" id="L26">  private static String REGEX_ZIP = &quot;\\[\\[zip]]&quot;;</span>
+<span class="fc" id="L27">  private static String REGEX_PHONE1 = &quot;\\[\\[phone1]]&quot;;</span>
+<span class="fc" id="L28">  private static String REGEX_PHONE2 = &quot;\\[\\[phone2]]&quot;;</span>
+<span class="fc" id="L29">  private static String REGEX_EMAIL = &quot;\\[\\[email]]&quot;;</span>
+<span class="fc" id="L30">  private static String REGEX_WEB = &quot;\\[\\[web]]&quot;;</span>
+
+
+  /**
+   * constructor
+   * @param memberInfoList handle List of PersonInfo
+   * @param template template file name
+   */
+<span class="fc" id="L38">  public TemplatePopulator(List&lt;MemberInfo&gt; memberInfoList, String template) {</span>
+<span class="fc" id="L39">    this.memberInfoList = memberInfoList;</span>
+<span class="fc" id="L40">    this.template = template;</span>
+<span class="fc" id="L41">    this.path = Paths.get(template);</span>
+<span class="fc" id="L42">  }</span>
+
+  /**
+   *
+   * @param info one element in List of PersonInfo
+   * @return template filling result as a String data
+   * @throws IOException when i/o exception happens
+   */
+  public String populateTemplate(MemberInfo info) throws IOException {
+
+<span class="fc" id="L52">    String data = Files.readString(this.path);</span>
+<span class="fc" id="L53">    data = data.replaceAll(REGEX_FIR_NAME, info.getFirst_name());</span>
+<span class="fc" id="L54">    data = data.replaceAll(REGEX_LAST_NAME, info.getLast_name());</span>
+<span class="fc" id="L55">    data = data.replaceAll(REGEX_COMP_NAME, info.getCompany_name());</span>
+<span class="fc" id="L56">    data = data.replaceAll(REGEX_ADD, info.getAddress());</span>
+<span class="fc" id="L57">    data = data.replaceAll(REGEX_CITY, info.getCity());</span>
+<span class="fc" id="L58">    data = data.replaceAll(REGEX_COUNTY, info.getCounty());</span>
+<span class="fc" id="L59">    data = data.replaceAll(REGEX_STATE, info.getState());</span>
+<span class="fc" id="L60">    data = data.replaceAll(REGEX_ZIP, info.getZip());</span>
+<span class="fc" id="L61">    data = data.replaceAll(REGEX_PHONE1, info.getPhone1());</span>
+<span class="fc" id="L62">    data = data.replaceAll(REGEX_PHONE2, info.getPhone2());</span>
+<span class="fc" id="L63">    data = data.replaceAll(REGEX_EMAIL, info.getEmail());</span>
+<span class="fc" id="L64">    data = data.replaceAll(REGEX_WEB, info.getWeb());</span>
+<span class="fc" id="L65">    return data;</span>
+
+  }
+
+
+  /**
+   * @throws IOException when format is bad
+   * @param output output path
+   */
+  public void populateAll(String output) throws IOException {
+    FileWriter writer;
+<span class="fc bfc" id="L76" title="All 2 branches covered.">    if (output == null){</span>
+<span class="fc bfc" id="L77" title="All 2 branches covered.">      for (int i = 0; i &lt; this.memberInfoList.size(); i++){</span>
+<span class="fc" id="L78">        System.out.println(populateTemplate(this.memberInfoList.get(i)));</span>
+      }
+    }
+    else {
+<span class="fc bfc" id="L82" title="All 2 branches covered.">      for (int i = 0; i &lt; this.memberInfoList.size(); i++){</span>
+<span class="fc" id="L83">                  writer = new FileWriter(output</span>
+<span class="fc" id="L84">                  + memberInfoList.get(i).getFirst_name()</span>
+                  + &quot;_&quot;
+<span class="fc" id="L86">                  + memberInfoList.get(i).getLast_name()</span>
+                  + &quot;.txt&quot;);
+<span class="fc" id="L88">          writer.write(populateTemplate(this.memberInfoList.get(i)));</span>
+<span class="fc" id="L89">          writer.flush();</span>
+<span class="fc" id="L90">          writer.close();</span>
+      }
+    }
+<span class="fc" id="L93">  }</span>
+
+
+  /**
+   *
+   * @param path set path
+   */
+  public void setPath(Path path) {
+<span class="fc" id="L101">    this.path = path;</span>
+<span class="fc" id="L102">  }</span>
+
+  /**
+   * @return TemplatePopulator to string
+   */
+  @Override
+  public String toString() {
+<span class="fc" id="L109">    return &quot;TemplatePopulator{&quot; +</span>
+            &quot;memberInfoList=&quot; + memberInfoList +
+            &quot;, template='&quot; + template + '\'' +
+            &quot;, path=&quot; + path +
+            '}';
+  }
+
+  /**
+   * @param o object TemplatePopulator
+   * @return if two objects are equal
+   */
+  @Override
+  public boolean equals(Object o) {
+<span class="fc bfc" id="L122" title="All 2 branches covered.">    if (this == o) return true;</span>
+<span class="fc bfc" id="L123" title="All 2 branches covered.">    if (!(o instanceof TemplatePopulator)) return false;</span>
+<span class="fc" id="L124">    TemplatePopulator that = (TemplatePopulator) o;</span>
+<span class="pc bpc" id="L125" title="4 of 6 branches missed.">    return Objects.equals(memberInfoList, that.memberInfoList) &amp;&amp; Objects.equals(template, that.template) &amp;&amp; Objects.equals(path, that.path);</span>
+  }
+
+  /**
+   * @return TemplatePopulator's hashcode
+   */
+  @Override
+  public int hashCode() {
+<span class="fc" id="L133">    return Objects.hash(memberInfoList, template, path);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

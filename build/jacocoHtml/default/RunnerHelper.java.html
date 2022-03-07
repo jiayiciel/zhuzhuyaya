@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RunnerHelper.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">assignment3</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">RunnerHelper.java</span></div><h1>RunnerHelper.java</h1><pre class="source lang-java linenums">import java.io.IOException;
+import java.nio.file.Paths;
+
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
+
+
+/**
+ * Helper class for CLIRunner
+ */
+<span class="nc" id="L12">public class RunnerHelper {</span>
+
+
+    private static String CSVPath;
+    private static String outPath;
+
+
+    private static final String LETTER_TEMPLATE_TXT = &quot;docs/letter-template.txt&quot;;
+    private static final String EMAIL_TEMPLATE_TXT = &quot;docs/email-template.txt&quot;;
+    private static final String MEMBER_CSV_PATH = &quot;docs/insurance-company-members.csv&quot;;
+
+
+    /**
+     * @param options options help create the CLI
+     * @return options
+     */
+    public static Options addOption(Options options){
+<span class="fc" id="L29">        options.addOption(&quot;e&quot;, &quot;email&quot;, false, &quot;only generate email messages&quot;);</span>
+<span class="fc" id="L30">        options.addOption(&quot;l&quot;, &quot;letter&quot;, false, &quot;only generate letters&quot;);</span>
+<span class="fc" id="L31">        options.addOption(Option.builder(&quot;et&quot;).longOpt(&quot;email-template&quot;)</span>
+<span class="fc" id="L32">                .desc(&quot;accept a filename that holds the email template, required if --email is used&quot;)</span>
+<span class="fc" id="L33">                .argName(&quot;file&quot;)</span>
+<span class="fc" id="L34">                .hasArg()</span>
+<span class="fc" id="L35">                .build());</span>
+<span class="fc" id="L36">        options.addOption(Option.builder(&quot;lt&quot;).longOpt(&quot;letter-template&quot;)</span>
+<span class="fc" id="L37">                .desc(&quot;accept a filename that holds the letter template, required if --letter is used&quot;)</span>
+<span class="fc" id="L38">                .argName(&quot;file&quot;)</span>
+<span class="fc" id="L39">                .hasArg()</span>
+<span class="fc" id="L40">                .build());</span>
+<span class="fc" id="L41">        options.addOption(Option.builder(&quot;od&quot;).longOpt(&quot;output-dir&quot;)</span>
+<span class="fc" id="L42">                .desc(&quot;accept the name of a folder, all output is placed in this folder&quot;)</span>
+<span class="fc" id="L43">                .argName(&quot;path&quot;)</span>
+<span class="fc" id="L44">                .hasArg()</span>
+<span class="fc" id="L45">                .build());</span>
+<span class="fc" id="L46">        options.addOption(Option.builder(&quot;cf&quot;).longOpt(&quot;csv-file&quot;)</span>
+<span class="fc" id="L47">                .desc(&quot;accept a filename that holds the email template&quot;)</span>
+<span class="fc" id="L48">                .argName(&quot;path&quot;)</span>
+<span class="fc" id="L49">                .hasArg()</span>
+<span class="fc" id="L50">                .build());</span>
+<span class="fc" id="L51">        return options;</span>
+    }
+
+
+    /**
+     * @param csvReader csvReader
+     * @param emailTemplate email template populator
+     * @param letterTemplate letter template populator
+     * @param cmd command line
+     * @param options options
+     * @throws IOException when format is bad
+     */
+    public static void cmdHelper(CSVReader csvReader, TemplatePopulator emailTemplate, TemplatePopulator letterTemplate, CommandLine cmd, Options options ) throws IOException {
+
+<span class="fc" id="L65">        emailTemplate = new TemplatePopulator(csvReader.openCSVToBean(), EMAIL_TEMPLATE_TXT);</span>
+<span class="fc" id="L66">        letterTemplate = new TemplatePopulator(csvReader.openCSVToBean(), LETTER_TEMPLATE_TXT);</span>
+
+<span class="fc bfc" id="L68" title="All 2 branches covered.">        if (!cmd.hasOption(&quot;output-dir&quot;)){</span>
+<span class="fc" id="L69">            System.out.println(&quot;Error: no output directory provided&quot;);</span>
+        }
+        else{
+<span class="fc" id="L72">            outPath = cmd.getOptionValue(&quot;output-dir&quot;);</span>
+        }
+
+<span class="fc bfc" id="L75" title="All 2 branches covered.">        if (cmd.hasOption(&quot;csv-file&quot;)){</span>
+
+
+<span class="fc" id="L78">            CSVPath = cmd.getOptionValue(&quot;csv-file&quot;);</span>
+<span class="fc" id="L79">            csvReader = new CSVReader(CSVPath);</span>
+
+
+        }
+
+
+<span class="fc bfc" id="L85" title="All 2 branches covered.">        if (cmd.hasOption(&quot;email&quot;) ){</span>
+<span class="fc bfc" id="L86" title="All 2 branches covered.">            if(cmd.hasOption(&quot;email-template&quot;)){</span>
+<span class="fc" id="L87">                emailTemplate.setPath(Paths.get(cmd.getOptionValue(&quot;email-template&quot;)));</span>
+<span class="fc" id="L88">                emailTemplate.populateAll(outPath);</span>
+
+            }
+            else {
+<span class="fc" id="L92">                System.out.println(&quot;Error: --email provided but no --email-template was provided&quot;);</span>
+            }
+
+        }
+
+
+<span class="pc bpc" id="L98" title="1 of 2 branches missed.">        else if (cmd.hasOption(&quot;letter&quot;)){</span>
+<span class="fc bfc" id="L99" title="All 2 branches covered.">            if(cmd.hasOption(&quot;letter-template&quot;)){</span>
+<span class="fc" id="L100">                letterTemplate.setPath(Paths.get(cmd.getOptionValue(&quot;letter-template&quot;)));</span>
+<span class="fc" id="L101">                letterTemplate.populateAll(outPath);</span>
+
+            } else{
+<span class="fc" id="L104">                System.out.println(&quot;Error: --letter provided but no --letter-template was provided&quot;);</span>
+            }
+
+        }
+
+<span class="fc" id="L109">    }</span>
+
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

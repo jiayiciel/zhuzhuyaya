@@ -1,0 +1,24 @@
+[[first_name]] [[last_name]]
+[[address]], [[city]],
+[[county]], [[state]], [[zip]]
+([[email]])
+
+Dear [[first_name]] [[last_name]],
+Because we value you as a customer, and we would like to further confirm your personal information so we can make sure our email is sent to the right customer.
+
+1. First Name: [[first_name]]
+2. Last Name: [[last_name]]
+3. Company Name: [[company_name]]
+4. Address: [[address]]
+5. City: [[city]]
+6. County: [[county]]
+7. State: [[state]]
+8. ZIP Code: [[zip]]
+9. Personal Phone Number: [[phone1]]
+10. Backup Personal Phone Number: [[phone2]]
+11. Personal Email Address: [[email]]
+12. Personal Web Page URL: [[web]]
+
+Please reply to the email to let us know if any information is incorrect or missing.
+Thank you for your patience and your loyalty.
+Sincerely,

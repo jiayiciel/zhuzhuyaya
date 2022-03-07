@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CLIRunner.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">assignment3</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">CLIRunner.java</span></div><h1>CLIRunner.java</h1><pre class="source lang-java linenums">import java.io.IOException;
+
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+
+/**
+ * this CLIRunner contains main() method to run the application
+ */
+<span class="fc" id="L12">public class CLIRunner {</span>
+
+  private static final String MEMBER_CSV_PATH = &quot;docs/insurance-company-members.csv&quot;;
+  private static final String LETTER_TEMPLATE_TXT = &quot;docs/letter-template.txt&quot;;
+  private static final String EMAIL_TEMPLATE_TXT = &quot;docs/email-template.txt&quot;;
+
+  private static CSVReader csvProcessor;
+  private static TemplatePopulator EmailTF;
+  private static TemplatePopulator LetterTF;
+
+
+  /**
+   *
+   * @param args default String[]
+   * @throws ParseException throws parse exception
+   * @throws IOException throws i/o exception
+   */
+  public static void main(String[] args) throws ParseException, IOException {
+
+
+<span class="fc" id="L32">    csvProcessor = new CSVReader(MEMBER_CSV_PATH);</span>
+<span class="fc" id="L33">    EmailTF = new TemplatePopulator(csvProcessor.openCSVToBean(), EMAIL_TEMPLATE_TXT);</span>
+<span class="fc" id="L34">    LetterTF = new TemplatePopulator(csvProcessor.openCSVToBean(), LETTER_TEMPLATE_TXT);</span>
+
+<span class="fc" id="L36">    Options options = new Options();</span>
+<span class="fc" id="L37">    options = RunnerHelper.addOption(options);</span>
+
+<span class="fc" id="L39">    CommandLineParser parser = new DefaultParser();</span>
+<span class="fc" id="L40">    CommandLine cmd = parser.parse(options, args);</span>
+
+
+<span class="fc" id="L43">    RunnerHelper.cmdHelper(csvProcessor, EmailTF, EmailTF, cmd, options);</span>
+
+<span class="fc" id="L45">  }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

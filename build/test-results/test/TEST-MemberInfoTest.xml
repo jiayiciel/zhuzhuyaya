@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="MemberInfoTest" tests="15" skipped="0" failures="0" errors="0" timestamp="2022-03-07T22:30:01" hostname="USABOS117224LT" time="0.207">
+  <properties/>
+  <testcase name="getWeb()" classname="MemberInfoTest" time="0.011"/>
+  <testcase name="getZip()" classname="MemberInfoTest" time="0.011"/>
+  <testcase name="getCompany_name()" classname="MemberInfoTest" time="0.013"/>
+  <testcase name="testToString()" classname="MemberInfoTest" time="0.026"/>
+  <testcase name="getFirst_name()" classname="MemberInfoTest" time="0.012"/>
+  <testcase name="getAddress()" classname="MemberInfoTest" time="0.011"/>
+  <testcase name="getCity()" classname="MemberInfoTest" time="0.013"/>
+  <testcase name="getCounty()" classname="MemberInfoTest" time="0.011"/>
+  <testcase name="getPhone1()" classname="MemberInfoTest" time="0.011"/>
+  <testcase name="getPhone2()" classname="MemberInfoTest" time="0.011"/>
+  <testcase name="testHashCode()" classname="MemberInfoTest" time="0.014"/>
+  <testcase name="testEquals()" classname="MemberInfoTest" time="0.023"/>
+  <testcase name="getEmail()" classname="MemberInfoTest" time="0.01"/>
+  <testcase name="getState()" classname="MemberInfoTest" time="0.01"/>
+  <testcase name="getLast_name()" classname="MemberInfoTest" time="0.011"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

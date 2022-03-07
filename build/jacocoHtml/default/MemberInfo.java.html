@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MemberInfo.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">assignment3</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">MemberInfo.java</span></div><h1>MemberInfo.java</h1><pre class="source lang-java linenums">import com.opencsv.bean.CsvBindByName;
+
+import java.util.Objects;
+
+/**
+ * Translate header to java object. Read from insurance-company-members.csv
+ */
+<span class="fc" id="L8">public class MemberInfo {</span>
+
+  @CsvBindByName
+  private String first_name;
+
+  @CsvBindByName
+  private String last_name;
+
+  @CsvBindByName
+  private String company_name;
+
+  @CsvBindByName
+  private String address;
+
+  @CsvBindByName
+  private String city;
+
+  @CsvBindByName
+  private String county;
+
+  @CsvBindByName
+  private String state;
+
+  @CsvBindByName
+  private String zip;
+
+  @CsvBindByName
+  private String phone1;
+
+  @CsvBindByName
+  private String phone2;
+
+  @CsvBindByName
+  private String email;
+
+  @CsvBindByName
+  private String web;
+
+  /**
+   *
+   * @return first name
+   */
+  public String getFirst_name() {
+<span class="fc" id="L51">    return first_name;</span>
+  }
+  /**
+   *
+   * @return last name
+   */
+  public String getLast_name() {
+<span class="fc" id="L58">    return last_name;</span>
+  }
+  /**
+   *
+   * @return company name
+   */
+  public String getCompany_name() {
+<span class="fc" id="L65">    return company_name;</span>
+  }
+  /**
+   *
+   * @return address
+   */
+  public String getAddress() {
+<span class="fc" id="L72">    return address;</span>
+  }
+
+  /**
+   *
+   * @return city
+   */
+  public String getCity() {
+<span class="fc" id="L80">    return city;</span>
+  }
+
+  /**
+   *
+   * @return county
+   */
+  public String getCounty() {
+<span class="fc" id="L88">    return county;</span>
+  }
+
+  /**
+   *
+   * @return state
+   */
+  public String getState() {
+<span class="fc" id="L96">    return state;</span>
+  }
+
+  /**
+   *
+   * @return zip
+   */
+  public String getZip() {
+<span class="fc" id="L104">    return zip;</span>
+  }
+
+  /**
+   *
+   * @return phone1
+   */
+  public String getPhone1() {
+<span class="fc" id="L112">    return phone1;</span>
+  }
+
+  /**
+   *
+   * @return phone2
+   */
+  public String getPhone2() {
+<span class="fc" id="L120">    return phone2;</span>
+  }
+
+  /**
+   *
+   * @return email
+   */
+  public String getEmail() {
+<span class="fc" id="L128">    return email;</span>
+  }
+
+  /**
+   *
+   * @return web
+   */
+  public String getWeb() {
+<span class="fc" id="L136">    return web;</span>
+  }
+
+
+  /**
+   * @return memberInfo to string
+   */
+  @Override
+  public String toString() {
+<span class="fc" id="L145">    return &quot;MemberInfo{&quot; +</span>
+            &quot;first_name='&quot; + first_name + '\'' +
+            &quot;, last_name='&quot; + last_name + '\'' +
+            &quot;, company_name='&quot; + company_name + '\'' +
+            &quot;, address='&quot; + address + '\'' +
+            &quot;, city='&quot; + city + '\'' +
+            &quot;, county='&quot; + county + '\'' +
+            &quot;, state='&quot; + state + '\'' +
+            &quot;, zip='&quot; + zip + '\'' +
+            &quot;, phone1='&quot; + phone1 + '\'' +
+            &quot;, phone2='&quot; + phone2 + '\'' +
+            &quot;, email='&quot; + email + '\'' +
+            &quot;, web='&quot; + web + '\'' +
+            '}';
+  }
+
+  /**
+   * @param o memberInfo object
+   * @return if two objects are equal
+   */
+  @Override
+  public boolean equals(Object o) {
+<span class="fc bfc" id="L167" title="All 2 branches covered.">    if (this == o) return true;</span>
+<span class="fc bfc" id="L168" title="All 2 branches covered.">    if (!(o instanceof MemberInfo)) return false;</span>
+<span class="fc" id="L169">    MemberInfo that = (MemberInfo) o;</span>
+<span class="pc bpc" id="L170" title="11 of 24 branches missed.">    return Objects.equals(first_name, that.first_name) &amp;&amp; Objects.equals(last_name, that.last_name) &amp;&amp; Objects.equals(company_name, that.company_name) &amp;&amp; Objects.equals(address, that.address) &amp;&amp; Objects.equals(city, that.city) &amp;&amp; Objects.equals(county, that.county) &amp;&amp; Objects.equals(state, that.state) &amp;&amp; Objects.equals(zip, that.zip) &amp;&amp; Objects.equals(phone1, that.phone1) &amp;&amp; Objects.equals(phone2, that.phone2) &amp;&amp; Objects.equals(email, that.email) &amp;&amp; Objects.equals(web, that.web);</span>
+  }
+
+  /**
+   * @return memberInfo's hashcode
+   */
+  @Override
+  public int hashCode() {
+<span class="fc" id="L178">    return Objects.hash(first_name, last_name, company_name, address, city, county, state, zip, phone1, phone2, email, web);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

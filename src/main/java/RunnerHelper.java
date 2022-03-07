@@ -2,11 +2,13 @@ import java.io.IOException;
 import java.nio.file.Paths;
 
 import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 
 
+/**
+ * Helper class for CLIRunner
+ */
 public class RunnerHelper {
 
 
@@ -19,10 +21,10 @@ public class RunnerHelper {
     private static final String MEMBER_CSV_PATH = "docs/insurance-company-members.csv";
 
 
-    public RunnerHelper() throws IOException {
-    }
-
-
+    /**
+     * @param options options help create the CLI
+     * @return options
+     */
     public static Options addOption(Options options){
         options.addOption("e", "email", false, "only generate email messages");
         options.addOption("l", "letter", false, "only generate letters");
@@ -46,46 +48,62 @@ public class RunnerHelper {
                 .argName("path")
                 .hasArg()
                 .build());
-        options.addOption(Option.builder("h").longOpt("help")
-                .desc("print help information")
-                .build());
         return options;
     }
 
 
-    public static void cmdHelper(CSVProcessor defaultCSVProcessor, TemplateFiller defaultEmailTF, TemplateFiller defaultLetterTF,CommandLine cmd, Options options,HelpFormatter formatter ) throws IOException {
-        if (cmd.hasOption("output-dir")){
+    /**
+     * @param csvReader csvReader
+     * @param emailTemplate email template populator
+     * @param letterTemplate letter template populator
+     * @param cmd command line
+     * @param options options
+     * @throws IOException when format is bad
+     */
+    public static void cmdHelper(CSVReader csvReader, TemplatePopulator emailTemplate, TemplatePopulator letterTemplate, CommandLine cmd, Options options ) throws IOException {
+
+        emailTemplate = new TemplatePopulator(csvReader.openCSVToBean(), EMAIL_TEMPLATE_TXT);
+        letterTemplate = new TemplatePopulator(csvReader.openCSVToBean(), LETTER_TEMPLATE_TXT);
+
+        if (!cmd.hasOption("output-dir")){
+            System.out.println("Error: no output directory provided");
+        }
+        else{
             outPath = cmd.getOptionValue("output-dir");
         }
 
         if (cmd.hasOption("csv-file")){
+
+
             CSVPath = cmd.getOptionValue("csv-file");
+            csvReader = new CSVReader(CSVPath);
 
-            defaultCSVProcessor = new CSVProcessor(CSVPath);
-            defaultEmailTF = new TemplateFiller(defaultCSVProcessor.openCSVToBean(), EMAIL_TEMPLATE_TXT);
-            defaultLetterTF = new TemplateFiller(defaultCSVProcessor.openCSVToBean(), LETTER_TEMPLATE_TXT);
+
         }
 
-        if (cmd.hasOption("email") && cmd.hasOption("email-template")){
-            defaultEmailTF.setPath(Paths.get(cmd.getOptionValue("email-template")));
-//            defaultEmailTF.fillAll();
-            defaultEmailTF.fillAll(outPath);
+
+        if (cmd.hasOption("email") ){
+            if(cmd.hasOption("email-template")){
+                emailTemplate.setPath(Paths.get(cmd.getOptionValue("email-template")));
+                emailTemplate.populateAll(outPath);
+
+            }
+            else {
+                System.out.println("Error: --email provided but no --email-template was provided");
+            }
+
         }
 
-        else if (cmd.hasOption("letter") && cmd.hasOption("letter-template")){
-            defaultLetterTF.setPath(Paths.get(cmd.getOptionValue("letter-template")));
-//            defaultLetterTF.fillAll();
-            defaultLetterTF.fillAll(outPath);
-        }
 
-        if (cmd.hasOption("letter") && !cmd.hasOption("letter-template")){
-            System.out.println("Error: --letter provided but no --letter-template was given");
-            formatter.printHelp("please make sure you make right input" ,options);
-        }
+        else if (cmd.hasOption("letter")){
+            if(cmd.hasOption("letter-template")){
+                letterTemplate.setPath(Paths.get(cmd.getOptionValue("letter-template")));
+                letterTemplate.populateAll(outPath);
 
-        if (cmd.hasOption("email") && !cmd.hasOption("email-template")){
-            System.out.println("Error: --email provided but no --email-template was given");
-            formatter.printHelp("please make sure you make right input" ,options);
+            } else{
+                System.out.println("Error: --letter provided but no --letter-template was provided");
+            }
+
         }
 
     }

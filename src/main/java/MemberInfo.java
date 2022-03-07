@@ -1,7 +1,9 @@
 import com.opencsv.bean.CsvBindByName;
 
+import java.util.Objects;
+
 /**
- * this class helps CSVProcessor. Fields in this class is the headers of insurance-company-members.csv
+ * Translate header to java object. Read from insurance-company-members.csv
  */
 public class MemberInfo {
 
@@ -135,7 +137,9 @@ public class MemberInfo {
   }
 
 
-
+  /**
+   * @return memberInfo to string
+   */
   @Override
   public String toString() {
     return "MemberInfo{" +
@@ -152,5 +156,25 @@ public class MemberInfo {
             ", email='" + email + '\'' +
             ", web='" + web + '\'' +
             '}';
+  }
+
+  /**
+   * @param o memberInfo object
+   * @return if two objects are equal
+   */
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof MemberInfo)) return false;
+    MemberInfo that = (MemberInfo) o;
+    return Objects.equals(first_name, that.first_name) && Objects.equals(last_name, that.last_name) && Objects.equals(company_name, that.company_name) && Objects.equals(address, that.address) && Objects.equals(city, that.city) && Objects.equals(county, that.county) && Objects.equals(state, that.state) && Objects.equals(zip, that.zip) && Objects.equals(phone1, that.phone1) && Objects.equals(phone2, that.phone2) && Objects.equals(email, that.email) && Objects.equals(web, that.web);
+  }
+
+  /**
+   * @return memberInfo's hashcode
+   */
+  @Override
+  public int hashCode() {
+    return Objects.hash(first_name, last_name, company_name, address, city, county, state, zip, phone1, phone2, email, web);
   }
 }
