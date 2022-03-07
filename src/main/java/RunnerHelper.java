@@ -14,9 +14,9 @@ public class RunnerHelper {
     private static String outPath;
 
 
-    private static final String DEFAULT_LETTER_TEMP = "docs/letter-template.txt";
-    private static final String DEFAULT_EMAIL_TEMP = "docs/email-template.txt";
-    private static final String DEFAULT_CVS_PATH = "docs/insurance-company-members.csv";
+    private static final String LETTER_TEMPLATE_TXT = "docs/letter-template.txt";
+    private static final String EMAIL_TEMPLATE_TXT = "docs/email-template.txt";
+    private static final String MEMBER_CSV_PATH = "docs/insurance-company-members.csv";
 
 
     public RunnerHelper() throws IOException {
@@ -62,8 +62,8 @@ public class RunnerHelper {
             CSVPath = cmd.getOptionValue("csv-file");
 
             defaultCSVProcessor = new CSVProcessor(CSVPath);
-            defaultEmailTF = new TemplateFiller(defaultCSVProcessor.openCSVToBean(), DEFAULT_EMAIL_TEMP);
-            defaultLetterTF = new TemplateFiller(defaultCSVProcessor.openCSVToBean(), DEFAULT_LETTER_TEMP);
+            defaultEmailTF = new TemplateFiller(defaultCSVProcessor.openCSVToBean(), EMAIL_TEMPLATE_TXT);
+            defaultLetterTF = new TemplateFiller(defaultCSVProcessor.openCSVToBean(), LETTER_TEMPLATE_TXT);
         }
 
         if (cmd.hasOption("email") && cmd.hasOption("email-template")){

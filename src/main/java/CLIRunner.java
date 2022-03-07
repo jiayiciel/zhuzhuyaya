@@ -1,12 +1,9 @@
 import java.io.IOException;
-import java.nio.file.Paths;
-import java.util.List;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
@@ -16,13 +13,13 @@ import org.apache.commons.cli.ParseException;
  */
 public class CLIRunner {
 
-  private static final String DEFAULT_CSV_PATH = "docs/insurance-company-members.csv";
-  private static final String DEFAULT_LETTER_TEMP = "docs/letter-template.txt";
-  private static final String DEFAULT_EMAIL_TEMP = "docs/email-template.txt";
+  private static final String MEMBER_CSV_PATH = "docs/insurance-company-members.csv";
+  private static final String LETTER_TEMPLATE_TXT = "docs/letter-template.txt";
+  private static final String EMAIL_TEMPLATE_TXT = "docs/email-template.txt";
 
-  private static CSVProcessor defaultCSVProcessor;
-  private static TemplateFiller defaultEmailTF;
-  private static TemplateFiller defaultLetterTF;
+  private static CSVProcessor csvProcessor;
+  private static TemplateFiller EmailTF;
+  private static TemplateFiller LetterTF;
 
   /**
    *
@@ -41,9 +38,9 @@ public class CLIRunner {
   public static void main(String[] args) throws ParseException, IOException {
 
 
-    defaultCSVProcessor = new CSVProcessor(DEFAULT_CSV_PATH);
-    defaultEmailTF = new TemplateFiller(defaultCSVProcessor.openCSVToBean(), DEFAULT_EMAIL_TEMP);
-    defaultLetterTF = new TemplateFiller(defaultCSVProcessor.openCSVToBean(), DEFAULT_LETTER_TEMP);
+    csvProcessor = new CSVProcessor(MEMBER_CSV_PATH);
+    EmailTF = new TemplateFiller(csvProcessor.openCSVToBean(), EMAIL_TEMPLATE_TXT);
+    LetterTF = new TemplateFiller(csvProcessor.openCSVToBean(), LETTER_TEMPLATE_TXT);
 
     Options options = new Options();
     options = RunnerHelper.addOption(options);
@@ -55,7 +52,7 @@ public class CLIRunner {
 
     formatter.printHelp("txt_filler", options, true);
 
-    RunnerHelper.cmdHelper(defaultCSVProcessor, defaultEmailTF, defaultEmailTF, cmd, options, formatter);
+    RunnerHelper.cmdHelper(csvProcessor, EmailTF, EmailTF, cmd, options, formatter);
 
   }
 
