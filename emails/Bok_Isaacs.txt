@@ -1,4 +1,3 @@
-From: insuranceCompany@ic.com
 To: bok.isaacs@aol.com
 Subject: Insurance company – information about recent data breach
 Dear Bok Isaacs,

@@ -1,4 +1,3 @@
-From: insuranceCompany@ic.com
 To: jshin@shin.com
 Subject: Insurance company – information about recent data breach
 Dear Jesusa Shin,

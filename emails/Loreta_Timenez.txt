@@ -1,4 +1,3 @@
-From: insuranceCompany@ic.com
 To: loreta.timenez@hotmail.com
 Subject: Insurance company – information about recent data breach
 Dear Loreta Timenez,

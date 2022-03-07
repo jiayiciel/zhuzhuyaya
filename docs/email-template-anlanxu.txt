@@ -1,6 +1,6 @@
-From: anlanxu@gmail.com
+From: zheli6403@gmail.com
 To: [[email]]
-Subject: email to confirm your personal information
+Subject: email to members confirm personal information
 
 Dear [[first_name]] [[last_name]],
 you have already been one of our VIPs!!

@@ -1,4 +1,3 @@
-From: insuranceCompany@ic.com
 To: cecilia_colaizzo@colaizzo.com
 Subject: Insurance company – information about recent data breach
 Dear Cecilia Colaizzo,

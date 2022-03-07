@@ -1,4 +1,3 @@
-From: insuranceCompany@ic.com
 To: cherry@lietz.com
 Subject: Insurance company – information about recent data breach
 Dear Cherry Lietz,

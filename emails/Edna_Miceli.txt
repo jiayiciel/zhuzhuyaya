@@ -1,4 +1,3 @@
-From: insuranceCompany@ic.com
 To: emiceli@miceli.org
 Subject: Insurance company – information about recent data breach
 Dear Edna Miceli,
