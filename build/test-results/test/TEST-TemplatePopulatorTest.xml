@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TemplatePopulatorTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-03-07T22:30:01" hostname="USABOS117224LT" time="0.391">
+<testsuite name="TemplatePopulatorTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-03-08T03:11:26" hostname="USABOS117224LT" time="0.539">
   <properties/>
-  <testcase name="testToString()" classname="TemplatePopulatorTest" time="0.013"/>
-  <testcase name="populateTemplate()" classname="TemplatePopulatorTest" time="0.021"/>
-  <testcase name="testHashCode()" classname="TemplatePopulatorTest" time="0.014"/>
-  <testcase name="testEquals()" classname="TemplatePopulatorTest" time="0.043"/>
-  <testcase name="populateAll()" classname="TemplatePopulatorTest" time="0.271"/>
-  <testcase name="setPath()" classname="TemplatePopulatorTest" time="0.026"/>
+  <testcase name="testToString()" classname="TemplatePopulatorTest" time="0.027"/>
+  <testcase name="populateTemplate()" classname="TemplatePopulatorTest" time="0.044"/>
+  <testcase name="testHashCode()" classname="TemplatePopulatorTest" time="0.019"/>
+  <testcase name="testEquals()" classname="TemplatePopulatorTest" time="0.034"/>
+  <testcase name="populateAll()" classname="TemplatePopulatorTest" time="0.374"/>
+  <testcase name="setPath()" classname="TemplatePopulatorTest" time="0.039"/>
   <system-out><![CDATA[From: insuranceCompany@ic.com
 To: jbutt@gmail.com
 Subject: Insurance company – information about recent data breach

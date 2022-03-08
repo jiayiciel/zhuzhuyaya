@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="CLIRunnerTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-03-07T22:29:59" hostname="USABOS117224LT" time="1.24">
+<testsuite name="CLIRunnerTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-03-08T03:11:24" hostname="USABOS117224LT" time="1.432">
   <properties/>
-  <testcase name="main()" classname="CLIRunnerTest" time="0.354"/>
-  <testcase name="main2()" classname="CLIRunnerTest" time="0.099"/>
-  <testcase name="main3()" classname="CLIRunnerTest" time="0.306"/>
-  <testcase name="main4()" classname="CLIRunnerTest" time="0.128"/>
-  <testcase name="main5()" classname="CLIRunnerTest" time="0.173"/>
-  <testcase name="main6()" classname="CLIRunnerTest" time="0.178"/>
+  <testcase name="main()" classname="CLIRunnerTest" time="0.306"/>
+  <testcase name="main2()" classname="CLIRunnerTest" time="0.078"/>
+  <testcase name="main3()" classname="CLIRunnerTest" time="0.323"/>
+  <testcase name="main4()" classname="CLIRunnerTest" time="0.185"/>
+  <testcase name="main5()" classname="CLIRunnerTest" time="0.27"/>
+  <testcase name="main6()" classname="CLIRunnerTest" time="0.267"/>
   <system-out><![CDATA[Error: no output directory provided
 Error: --letter provided but no --letter-template was provided
 Error: no output directory provided
